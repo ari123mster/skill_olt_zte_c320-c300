@@ -1,0 +1,7 @@
+*.xlsx
+*.kdbx
+*.key
+*.keyx
+*.bak
+*.tmp
+~$*

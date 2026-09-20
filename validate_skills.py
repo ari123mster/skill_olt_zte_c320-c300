@@ -13,6 +13,7 @@ expected = {
     'zte-olt-onu-serial-replacement', 'zte-olt-onu-tr069-acs',
     'zte-olt-clock-ntp', 'zte-olt-snmp-management',
     'zte-olt-admin-ssh', 'zte-olt-onu-decommission',
+    'zte-olt-connection-inventory', 'zte-olt-onu-pon-migration',
 }
 files = sorted(root.glob('*/SKILL.md'))
 assert {p.parent.name for p in files} == expected, 'Skill set mismatch'
@@ -35,7 +36,7 @@ for path in files:
     assert name in readme, ('README missing', name)
     assert '## Persetujuan pengguna untuk eksekusi berisiko' in body, path
     assert 'Diam atau jawaban ambigu bukan persetujuan.' in body, path
-    assert re.search(r'https://(?:github\.com|pastebin\.com|www\.tembolok\.id)/', body), path
+    assert re.search(r'https://(?:github\.com|pastebin\.com|www\.tembolok\.id|openpyxl\.readthedocs\.io)/', body), path
     texts.append(text)
     print('PASS', name)
 combined = '\n'.join(texts)
@@ -57,5 +58,10 @@ for question in ('Mode bridge mau access atau trunk?', 'VLAN berapa yang mau dia
     assert question in provisioning, question
 assert 'tr069-mgmt <TR069_ID> acs <ACS_URL>' in acs
 assert 'Inform terbaru' in acs
+migration = (root / 'zte-olt-onu-pon-migration/SKILL.md').read_text(encoding='utf-8')
+for required in ('## Rollback', '## Rencana dan titik persetujuan', 'no onu <OLD_ONU_ID>', 'Jangan menghapus registrasi lama sebelum'):
+    assert required in migration, required
+assert '## Batas sementara: hanya pelanggan PPPoE' in migration
+assert 'PPPoE yang diterminasi di router pelanggan melalui ONT bridge tetap termasuk bridge' in migration
 print(f'PASS: {len(files)} skills; frontmatter subset, sections, fences, catalog and command coverage.')
 print('Offline only: no firmware or live-device validation.')

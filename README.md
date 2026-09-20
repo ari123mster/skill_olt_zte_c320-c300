@@ -1,6 +1,12 @@
 # Paket skill OLT ZTE C300/C320
 
-18 skill mandiri; dokumen saja, belum diinstal atau diuji pada OLT.
+20 skill mandiri; dokumen saja, belum diinstal atau diuji pada OLT.
+
+Inventaris koneksi: olt_connections.xlsx, sheet OLT; password diganti Credential_Ref. Rahasia disimpan di KeePassXC olt_credentials.kdbx, dibuat pengguna secara lokal. Panduan Windows/Linux: MIGRASI.md. Tidak ada profil nyata atau koneksi otomatis.
+
+Skill tambahan: zte-olt-connection-inventory — tambah/update host, SSH/Telnet, port, username dan referensi vault dalam Excel; password hanya di KeePassXC.
+
+Skill tambahan untuk review: zte-olt-onu-pon-migration — pemindahan ONU antar-PON pada OLT yang sama, backup, persetujuan cutover, verifikasi dan rollback; belum diuji perangkat.
 
 ## Daftar fungsi
 
@@ -26,6 +32,16 @@
 
 Tambahan Tembolok: https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
 Console/PON/management: bootstrap-management; NTP: clock-ntp; SNMP: snmp-management; akun/SSH: admin-ssh; status uplink: uplink-vlan-operations; DBA tipe 5/GEM traffic/show profile: gpon-profiles; discovery/optik PON: onu-diagnostics; binding WAN eth/SSID/hotspot: onu-provisioning; hapus ONU: onu-decommission; trunk eksplisit/cascade: onu-trunking; audit: onu-config-audit. Topik lain digabung dengan skill existing. Klaim kapasitas/speed yang tidak konsisten serta contoh WEP/open Wi-Fi diberi pengaman, bukan default otomatis.
+
+## Referensi silang Idrus Firmansyah
+
+https://idrusfirmansyah.blogspot.com/2018/07/10-basic-command-di-olt-gpon-zte.html
+Judul aktual: 12 Text CLI Populer di OLT GPON ZTE. Semua 12 topik telah tersedia:
+- Nomor 1 dan 11 (config interface/PON ONU): onu-config-audit.
+- Nomor 2–7 (state, optik, trafik, histori, MAC, versi): onu-diagnostics.
+- Nomor 8 dan 10 (status Ethernet, lock port): onu-access-management.
+- Nomor 9 dan 12 (reboot, factory reset): onu-lifecycle.
+Tidak dibuat skill duplikat. Contoh konfigurasi output bukan instruksi provisioning otomatis; ketentuan persetujuan eksekusi berisiko tetap berlaku. Link artikel terkait di sidebar tidak termasuk cakupan pemeriksaan ini.
 
 ## Sumber
 | Dokumen | Skill tujuan |

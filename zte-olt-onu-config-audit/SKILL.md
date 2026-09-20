@@ -113,5 +113,9 @@ Untuk perubahan, simpan kondisi awal, rencana pemulihan, dan persetujuan eksplis
 
 ## Sumber
 
+Referensi silang: Idrus Firmansyah, "12 Text CLI Populer di OLT GPON ZTE" (29 Juli 2018). Perintah fungsi terkait sudah tercakup; bukan prosedur baru.
+https://idrusfirmansyah.blogspot.com/2018/07/10-basic-command-di-olt-gpon-zte.html
+
+
 Diadaptasi dari `00. Perintah Dasar OLT` oleh denniseptian:
 https://github.com/denniseptian/ZTE-C300/blob/master/00.%20Perintah%20Dasar%20OLT
