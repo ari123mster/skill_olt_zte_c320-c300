@@ -1,6 +1,6 @@
 # Paket skill OLT ZTE C300/C320
 
-14 skill mandiri, disimpan sebagai dokumen saja. Tidak diinstal ke Hermes, tidak terhubung ke OLT, dan tidak menjalankan konfigurasi perangkat.
+18 skill mandiri; dokumen saja, belum diinstal atau diuji pada OLT.
 
 ## Daftar fungsi
 
@@ -19,16 +19,15 @@
 13. zte-olt-onu-serial-replacement — penggantian binding serial ONT existing.
 14. zte-olt-onu-tr069-acs — tambahan ACS opsional; wajib tanya ya/tidak saat aktivasi.
 
-## Cakupan sumber
+15. zte-olt-clock-ntp — jam, timezone dan NTP.
+16. zte-olt-snmp-management — community dan monitoring SNMP.
+17. zte-olt-admin-ssh — akun administrator dan SSH.
+18. zte-olt-onu-decommission — penghapusan registrasi ONU.
 
-Sumber pertama: hanya dokumen yang diminta, bukan seluruh repository:
-https://github.com/denniseptian/ZTE-C300/blob/master/00.%20Perintah%20Dasar%20OLT
+Tambahan Tembolok: https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
+Console/PON/management: bootstrap-management; NTP: clock-ntp; SNMP: snmp-management; akun/SSH: admin-ssh; status uplink: uplink-vlan-operations; DBA tipe 5/GEM traffic/show profile: gpon-profiles; discovery/optik PON: onu-diagnostics; binding WAN eth/SSID/hotspot: onu-provisioning; hapus ONU: onu-decommission; trunk eksplisit/cascade: onu-trunking; audit: onu-config-audit. Topik lain digabung dengan skill existing. Klaim kapasitas/speed yang tidak konsisten serta contoh WEP/open Wi-Fi diberi pengaman, bukan default otomatis.
 
-Semua topik dokumen tersebut dipetakan ke skill 1–6: sebelas pemeriksaan/operasi awal; uptime, board, processor, temperature, slot; pencarian SN; IP-host; reboot/factory reset; lock/unlock; DHCP; uplink; reset slot; swap; VLAN.
-
-Sumber kedua: semua 12 dokumen bernomor dan README, revisi bee34b4794055c7c67c32216c471cbb675342ca7:
-https://github.com/randifilan/zte-c320/tree/bee34b4794055c7c67c32216c471cbb675342ca7
-
+## Sumber
 | Dokumen | Skill tujuan |
 |---|---|
 | 00. Defaut Config.md | bootstrap-management |

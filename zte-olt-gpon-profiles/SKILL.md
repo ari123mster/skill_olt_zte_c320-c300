@@ -7,6 +7,16 @@ platforms: [linux, macos, windows]
 
 # Profile GPON ZTE
 
+## Persetujuan pengguna untuk eksekusi berisiko
+
+Wajib minta dan tunggu persetujuan eksplisit pengguna sebelum setiap eksekusi berisiko. Permintaan diagnosis, aktivasi umum, pembuatan skill, atau persetujuan sebelumnya bukan izin untuk tindakan baru.
+
+Sebelum meminta izin, tampilkan target pelanggan/SN/interface/slot, perintah atau kelompok perubahan yang tepat (rahasia disamarkan), dampak layanan/keamanan, potensi kehilangan konfigurasi, dan rencana pemulihan. Eksekusi hanya tindakan dalam lingkup yang disetujui. Pengguna boleh menyetujui satu kelompok perintah yang sudah dijelaskan; perubahan target, perintah, dampak atau langkah pemulihan memerlukan persetujuan baru. Diam atau jawaban ambigu bukan persetujuan.
+
+Termasuk berisiko: registrasi/penghapusan/ganti SN ONU; perubahan VLAN, WAN, port, profile, bandwidth, ACS, Wi-Fi, routing dan akses management; shutdown/unlock/aktivasi PON; DHCP renew; reboot/factory reset/reset-card/swap; perubahan akun/password/SSH/Telnet/SNMP/waktu; penonaktifan proteksi; pembukaan akses remote; serta `write` atau penyimpanan permanen. Rollback yang mengubah perangkat juga harus tercakup izin atau dimintakan izin baru.
+
+Pembacaan status biasa pada target yang sudah diotorisasi dapat dilakukan tanpa izin mutasi tambahan. Jika tingkat risiko tidak jelas, berhenti dan tanyakan. Jangan melanjutkan mutasi otomatis setelah error, timeout atau putus koneksi: periksa kondisi secara baca-saja, lalu minta persetujuan baru bila tindakan lanjutan diperlukan. Dalam proses tanpa pengguna hadir, jangan lakukan tindakan berisiko tanpa persetujuan spesifik yang sudah tercatat.
+
 ## Kapan Digunakan
 Menyiapkan profile sebelum provisioning ONT. Perubahan profile bersama dapat memengaruhi semua pelanggan pemakainya.
 
@@ -65,6 +75,28 @@ Target C320; kompatibilitas C300 wajib dikonfirmasi lewat dokumentasi firmware a
 Validasi identitas OLT, port, SN, ONU ID, VLAN, nama profile, dan seluruh placeholder sebelum penggunaan. VLAN 1–4094; ID dan port harus tersedia serta sesuai kapasitas perangkat. Tolak input berisi newline atau pemisah perintah. Jangan menyalin alamat, serial, password, atau angka contoh sebagai konfigurasi produksi.
 
 Sebelum perubahan: simpan konfigurasi awal, petakan dampak, tentukan rencana pemulihan, dan minta persetujuan target serta perubahan spesifik. Kerjakan satu target dahulu. Berhenti jika command ditolak; jangan mencoba variasi mutasi secara acak. Jangan menyimpan perubahan permanen sebelum verifikasi layanan dan izin penyimpanan. Password diisi operator melalui jalur aman; jangan dicetak ke laporan atau log.
+
+## Tambahan Tembolok: tipe 5 dan traffic GEM
+
+Baca profile aktual:
+```text
+show onu-type
+show gpon onu profile vlan
+show gpon profile tcont
+show gpon profile traffic
+```
+Dari global configuration masuk `gpon`; contoh bentuk tambahan:
+```text
+profile tcont <DBA_PROFILE> type 5 fixed <FIXED> assured <ASSURED> maximum <MAXIMUM>
+profile traffic <TRAFFIC_PROFILE> sir <SIR> pir <PIR>
+```
+Output sumber menandai FBW/ABW/MBW dan SIR/PIR dalam kbps, CBS/PBS dalam kbytes. Gunakan satuan output firmware, bukan interpretasi nama profile. Untuk menerapkan traffic profile pada GEM, bentuk sumber sebelumnya di interface ONU adalah `gemport <GEM_ID> traffic-limit upstream <UP_PROFILE> downstream <DOWN_PROFILE>`; validasi dukungan dan perubahan rate sebelum penerapan.
+
+Artikel memberi ONU-type gabungan `onu-type <TYPE> gpon max-tcont <N> max-gemport <N> max-switch-perslot <N> max-flow-perswitch <N>` dan `onu-type-if <TYPE> eth_0/1-4` (juga wifi/pots). Range hanya jika model punya port tersebut dan firmware mendukung. Profile bernama ALL tidak membuktikan universal compatibility.
+
+Jangan memakai perhitungan kapasitas artikel sebagai aturan vendor: 1.25 Gbps bukan tepat 1000 Mbps; batas ONU dan budget DBA bergantung card/firmware serta overhead. Bahkan 128 × 8000 kbps = 1,024,000 kbps, bukan ≤1,000,000. `GPONSRV Parameter Exceeds Range` harus dicek terhadap batas profile/resource aktual, bukan otomatis diperbaiki dengan rate tertentu. T-CONT mengalokasikan bandwidth upstream, bukan tunnel simetris. Satu GEM dapat memuat beberapa VLAN seperti contoh trunk sumber lain. Jangan mengubah profile bersama tanpa memetakan pengguna terdampak.
+
+Sumber tambahan: https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
 
 ## Sumber
 

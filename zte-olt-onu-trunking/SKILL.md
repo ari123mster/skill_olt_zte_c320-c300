@@ -7,8 +7,24 @@ platforms: [linux, macos, windows]
 
 # Trunk dan Multiple Trunking ONT
 
+## Persetujuan pengguna untuk eksekusi berisiko
+
+Wajib minta dan tunggu persetujuan eksplisit pengguna sebelum setiap eksekusi berisiko. Permintaan diagnosis, aktivasi umum, pembuatan skill, atau persetujuan sebelumnya bukan izin untuk tindakan baru.
+
+Sebelum meminta izin, tampilkan target pelanggan/SN/interface/slot, perintah atau kelompok perubahan yang tepat (rahasia disamarkan), dampak layanan/keamanan, potensi kehilangan konfigurasi, dan rencana pemulihan. Eksekusi hanya tindakan dalam lingkup yang disetujui. Pengguna boleh menyetujui satu kelompok perintah yang sudah dijelaskan; perubahan target, perintah, dampak atau langkah pemulihan memerlukan persetujuan baru. Diam atau jawaban ambigu bukan persetujuan.
+
+Termasuk berisiko: registrasi/penghapusan/ganti SN ONU; perubahan VLAN, WAN, port, profile, bandwidth, ACS, Wi-Fi, routing dan akses management; shutdown/unlock/aktivasi PON; DHCP renew; reboot/factory reset/reset-card/swap; perubahan akun/password/SSH/Telnet/SNMP/waktu; penonaktifan proteksi; pembukaan akses remote; serta `write` atau penyimpanan permanen. Rollback yang mengubah perangkat juga harus tercakup izin atau dimintakan izin baru.
+
+Pembacaan status biasa pada target yang sudah diotorisasi dapat dilakukan tanpa izin mutasi tambahan. Jika tingkat risiko tidak jelas, berhenti dan tanyakan. Jangan melanjutkan mutasi otomatis setelah error, timeout atau putus koneksi: periksa kondisi secara baca-saja, lalu minta persetujuan baru bila tindakan lanjutan diperlukan. Dalam proses tanpa pengguna hadir, jangan lakukan tindakan berisiko tanpa persetujuan spesifik yang sudah tercatat.
+
 ## Kapan Digunakan
 Meneruskan beberapa VLAN tagged dengan satu native/untagged VLAN pada port ONT. Dukungan bergantung model dan firmware.
+
+## Klarifikasi wajib sebelum konfigurasi
+
+Jika permintaan hanya menyebut bridge, tanyakan access atau trunk dahulu. Tanyakan VLAN yang akan diaktifkan dan port eth tujuan. Untuk trunk, minta tagged VLAN list dan native/untagged VLAN (atau tidak ada) per port. Untuk access, satu VLAN untagged per port; jangan menjalankan template trunk untuk access. Jangan mengasumsikan semua VLAN lewat semua port. Jika jawaban sudah eksplisit, konfirmasi dalam ringkasan, tidak perlu tanya ulang.
+
+Validasi port fisik, VLAN 1–4094, mapping per port, tidak ada overlap native/tagged, dan dukungan tagged-only firmware bila diperlukan. Tunggu data lengkap. Saat aktivasi, tanyakan juga tambahan TR-069/ACS ya/tidak, kemudian minta persetujuan ringkasan sebelum mutasi.
 
 ## Prosedur
 1. Buat matriks VLAN pelanggan, VLAN jaringan, service-port, GEM/vport, dan port ONT. Nyatakan native VLAN terpisah dari tagged list.
@@ -44,6 +60,19 @@ Target C320; kompatibilitas C300 wajib dikonfirmasi lewat dokumentasi firmware a
 Validasi identitas OLT, port, SN, ONU ID, VLAN, nama profile, dan seluruh placeholder sebelum penggunaan. VLAN 1–4094; ID dan port harus tersedia serta sesuai kapasitas perangkat. Tolak input berisi newline atau pemisah perintah. Jangan menyalin alamat, serial, password, atau angka contoh sebagai konfigurasi produksi.
 
 Sebelum perubahan: simpan konfigurasi awal, petakan dampak, tentukan rencana pemulihan, dan minta persetujuan target serta perubahan spesifik. Kerjakan satu target dahulu. Berhenti jika command ditolak; jangan mencoba variasi mutasi secara acak. Jangan menyimpan perubahan permanen sebelum verifikasi layanan dan izin penyimpanan. Password diisi operator melalui jalur aman; jangan dicetak ke laporan atau log.
+
+## Tambahan Tembolok: trunk eksplisit
+
+Alternatif sumber pada mode `pon-onu-mng <ONU_IF>`:
+```text
+vlan port <ETH_IF> mode trunk
+vlan port <ETH_IF> vlan <TAGGED_VLAN_LIST>
+```
+Gunakan setelah dukungan model/firmware terkonfirmasi dan native/tagged requirements jelas. Ini alternatif mode hybrid, bukan command tambahan untuk semua port. Verifikasi perilaku untagged aktual; jangan mengasumsikan native VLAN implisit.
+
+Artikel mencontohkan ONT sebagai uplink OLT downstream. Ini desain cascade, bukan obat jalur optik buruk: perlu link budget, kapasitas shared PON, loop prevention, VLAN isolation dan fault-domain review. Jangan mengaktifkan cascade, web WAN, atau PPPoE otomatis karena template trunk memuatnya.
+
+Sumber tambahan: https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
 
 ## Sumber
 

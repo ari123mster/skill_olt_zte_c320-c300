@@ -11,6 +11,8 @@ expected = {
     'zte-olt-vlan-provisioning', 'zte-olt-onu-provisioning',
     'zte-olt-onu-trunking', 'zte-olt-onu-wan-web',
     'zte-olt-onu-serial-replacement', 'zte-olt-onu-tr069-acs',
+    'zte-olt-clock-ntp', 'zte-olt-snmp-management',
+    'zte-olt-admin-ssh', 'zte-olt-onu-decommission',
 }
 files = sorted(root.glob('*/SKILL.md'))
 assert {p.parent.name for p in files} == expected, 'Skill set mismatch'
@@ -31,7 +33,9 @@ for path in files:
         assert section in body, (path, section)
     assert text.count('```') % 2 == 0, path
     assert name in readme, ('README missing', name)
-    assert re.search(r'https://(?:github\.com|pastebin\.com)/', body), path
+    assert '## Persetujuan pengguna untuk eksekusi berisiko' in body, path
+    assert 'Diam atau jawaban ambigu bukan persetujuan.' in body, path
+    assert re.search(r'https://(?:github\.com|pastebin\.com|www\.tembolok\.id)/', body), path
     texts.append(text)
     print('PASS', name)
 combined = '\n'.join(texts)
@@ -49,6 +53,8 @@ provisioning = (root / 'zte-olt-onu-provisioning/SKILL.md').read_text(encoding='
 acs = (root / 'zte-olt-onu-tr069-acs/SKILL.md').read_text(encoding='utf-8')
 assert 'Mau ditambah TR-069/ACS atau tidak?' in provisioning
 assert 'Belum dijawab: tunggu' in provisioning
+for question in ('Mode bridge mau access atau trunk?', 'VLAN berapa yang mau diaktifkan?', 'Mau dipasang di port eth berapa saja?'):
+    assert question in provisioning, question
 assert 'tr069-mgmt <TR069_ID> acs <ACS_URL>' in acs
 assert 'Inform terbaru' in acs
 print(f'PASS: {len(files)} skills; frontmatter subset, sections, fences, catalog and command coverage.')

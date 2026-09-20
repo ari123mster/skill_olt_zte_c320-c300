@@ -13,6 +13,16 @@ metadata:
 
 Membaca optik uplink dan membership VLAN. Juga mendokumentasikan reset slot dan switchover sebagai operasi berisiko tinggi.
 
+## Persetujuan pengguna untuk eksekusi berisiko
+
+Wajib minta dan tunggu persetujuan eksplisit pengguna sebelum setiap eksekusi berisiko. Permintaan diagnosis, aktivasi umum, pembuatan skill, atau persetujuan sebelumnya bukan izin untuk tindakan baru.
+
+Sebelum meminta izin, tampilkan target pelanggan/SN/interface/slot, perintah atau kelompok perubahan yang tepat (rahasia disamarkan), dampak layanan/keamanan, potensi kehilangan konfigurasi, dan rencana pemulihan. Eksekusi hanya tindakan dalam lingkup yang disetujui. Pengguna boleh menyetujui satu kelompok perintah yang sudah dijelaskan; perubahan target, perintah, dampak atau langkah pemulihan memerlukan persetujuan baru. Diam atau jawaban ambigu bukan persetujuan.
+
+Termasuk berisiko: registrasi/penghapusan/ganti SN ONU; perubahan VLAN, WAN, port, profile, bandwidth, ACS, Wi-Fi, routing dan akses management; shutdown/unlock/aktivasi PON; DHCP renew; reboot/factory reset/reset-card/swap; perubahan akun/password/SSH/Telnet/SNMP/waktu; penonaktifan proteksi; pembukaan akses remote; serta `write` atau penyimpanan permanen. Rollback yang mengubah perangkat juga harus tercakup izin atau dimintakan izin baru.
+
+Pembacaan status biasa pada target yang sudah diotorisasi dapat dilakukan tanpa izin mutasi tambahan. Jika tingkat risiko tidak jelas, berhenti dan tanyakan. Jangan melanjutkan mutasi otomatis setelah error, timeout atau putus koneksi: periksa kondisi secara baca-saja, lalu minta persetujuan baru bila tindakan lanjutan diperlukan. Dalam proses tanpa pengguna hadir, jangan lakukan tindakan berisiko tanpa persetujuan spesifik yang sudah tercatat.
+
 ## Kapan Digunakan
 
 - Audit power optik uplink atau anggota VLAN.
@@ -74,6 +84,15 @@ Setelah operasi berisiko, cek `show card`, health system, uplink, VLAN, alarm, d
 Template ini adalah CLI perangkat, bukan shell OS. Tidak ada koneksi otomatis. Gunakan sesi operator berizin atau analisis output yang diberikan pengguna. Validasi OLT, interface, ID, dan firmware; tolak input yang menyisipkan newline/pemisah perintah. Jangan menjalankan placeholder literal. Redaksi password dan data pelanggan pada laporan.
 
 Untuk perubahan, simpan kondisi awal, rencana pemulihan, dan persetujuan eksplisit target serta dampak. Tidak ada auto-save, retry mutasi, reset, atau penonaktifan proteksi sebagai langkah diagnosis. Jika tidak ada akses perangkat, keluarkan rencana saja dan tandai belum diuji. Sumber komunitas bukan jaminan sintaks untuk semua firmware C300/C320. Lisensi sumber belum diverifikasi; tidak diberikan lisensi ulang.
+
+## Tambahan Tembolok: status fisik uplink
+```text
+show interface port-status <UPLINK_IF>
+show run interface <UPLINK_IF>
+```
+Catat link/admin status, media, native VLAN, speed, duplex dan negotiation. Artikel berisi ketidaksesuaian: perintah negotiation auto tetapi output no negotiation auto, serta label GE/FE yang tidak konsisten. Gunakan spesifikasi card/SFP dan hasil aktual; jangan memaksa auto-negotiation atau speed dari contoh. Flowcontrol/isolation bukan parameter yang boleh dimatikan otomatis.
+
+Sumber tambahan: https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
 
 ## Sumber
 

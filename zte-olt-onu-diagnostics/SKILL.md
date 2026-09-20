@@ -13,6 +13,16 @@ metadata:
 
 Gunakan perintah baca-saja untuk menilai status, sinyal, trafik, identitas, dan histori ONT. Jangan menyimpulkan akar masalah dari satu indikator.
 
+## Persetujuan pengguna untuk eksekusi berisiko
+
+Wajib minta dan tunggu persetujuan eksplisit pengguna sebelum setiap eksekusi berisiko. Permintaan diagnosis, aktivasi umum, pembuatan skill, atau persetujuan sebelumnya bukan izin untuk tindakan baru.
+
+Sebelum meminta izin, tampilkan target pelanggan/SN/interface/slot, perintah atau kelompok perubahan yang tepat (rahasia disamarkan), dampak layanan/keamanan, potensi kehilangan konfigurasi, dan rencana pemulihan. Eksekusi hanya tindakan dalam lingkup yang disetujui. Pengguna boleh menyetujui satu kelompok perintah yang sudah dijelaskan; perubahan target, perintah, dampak atau langkah pemulihan memerlukan persetujuan baru. Diam atau jawaban ambigu bukan persetujuan.
+
+Termasuk berisiko: registrasi/penghapusan/ganti SN ONU; perubahan VLAN, WAN, port, profile, bandwidth, ACS, Wi-Fi, routing dan akses management; shutdown/unlock/aktivasi PON; DHCP renew; reboot/factory reset/reset-card/swap; perubahan akun/password/SSH/Telnet/SNMP/waktu; penonaktifan proteksi; pembukaan akses remote; serta `write` atau penyimpanan permanen. Rollback yang mengubah perangkat juga harus tercakup izin atau dimintakan izin baru.
+
+Pembacaan status biasa pada target yang sudah diotorisasi dapat dilakukan tanpa izin mutasi tambahan. Jika tingkat risiko tidak jelas, berhenti dan tanyakan. Jangan melanjutkan mutasi otomatis setelah error, timeout atau putus koneksi: periksa kondisi secara baca-saja, lalu minta persetujuan baru bila tindakan lanjutan diperlukan. Dalam proses tanpa pengguna hadir, jangan lakukan tindakan berisiko tanpa persetujuan spesifik yang sudah tercatat.
+
 ## Kapan Digunakan
 
 - ONT offline, LOS, lambat, flapping, atau identitas perangkat perlu dicek.
@@ -111,6 +121,15 @@ Sumber tambahan: https://github.com/randifilan/zte-c320/tree/bee34b4794055c7c67c
 Template ini adalah CLI perangkat, bukan shell OS. Tidak ada koneksi otomatis. Gunakan sesi operator berizin atau analisis output yang diberikan pengguna. Validasi OLT, interface, ID, dan firmware; tolak input yang menyisipkan newline/pemisah perintah. Jangan menjalankan placeholder literal. Redaksi password dan data pelanggan pada laporan.
 
 Untuk perubahan, simpan kondisi awal, rencana pemulihan, dan persetujuan eksplisit target serta dampak. Tidak ada auto-save, retry mutasi, reset, atau penonaktifan proteksi sebagai langkah diagnosis. Jika tidak ada akses perangkat, keluarkan rencana saja dan tandai belum diuji. Sumber komunitas bukan jaminan sintaks untuk semua firmware C300/C320. Lisensi sumber belum diverifikasi; tidak diberikan lisensi ulang.
+
+## Tambahan Tembolok: discovery dan optik PON
+```text
+show gpon onu uncfg <OLT_IF>
+show interface optical-module-info <OLT_IF>
+```
+Optik PON memberi data modul, Tx, temperatur, tegangan, dan threshold. RxPower N/A pada modul PON tidak otomatis berarti semua ONU offline; korelasikan attenuation per ONU. Periksa `Config state` pada detail-info: `working` dengan `Config state: fail` belum berarti provisioning sukses. Artikel mencampur target command dan interface output contoh; selalu cocokkan target aktual.
+
+Sumber tambahan: https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
 
 ## Sumber
 

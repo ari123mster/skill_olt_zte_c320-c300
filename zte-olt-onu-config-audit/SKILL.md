@@ -13,6 +13,16 @@ metadata:
 
 Membaca konfigurasi interface GPON dan manajemen ONU tanpa mengubah perangkat.
 
+## Persetujuan pengguna untuk eksekusi berisiko
+
+Wajib minta dan tunggu persetujuan eksplisit pengguna sebelum setiap eksekusi berisiko. Permintaan diagnosis, aktivasi umum, pembuatan skill, atau persetujuan sebelumnya bukan izin untuk tindakan baru.
+
+Sebelum meminta izin, tampilkan target pelanggan/SN/interface/slot, perintah atau kelompok perubahan yang tepat (rahasia disamarkan), dampak layanan/keamanan, potensi kehilangan konfigurasi, dan rencana pemulihan. Eksekusi hanya tindakan dalam lingkup yang disetujui. Pengguna boleh menyetujui satu kelompok perintah yang sudah dijelaskan; perubahan target, perintah, dampak atau langkah pemulihan memerlukan persetujuan baru. Diam atau jawaban ambigu bukan persetujuan.
+
+Termasuk berisiko: registrasi/penghapusan/ganti SN ONU; perubahan VLAN, WAN, port, profile, bandwidth, ACS, Wi-Fi, routing dan akses management; shutdown/unlock/aktivasi PON; DHCP renew; reboot/factory reset/reset-card/swap; perubahan akun/password/SSH/Telnet/SNMP/waktu; penonaktifan proteksi; pembukaan akses remote; serta `write` atau penyimpanan permanen. Rollback yang mengubah perangkat juga harus tercakup izin atau dimintakan izin baru.
+
+Pembacaan status biasa pada target yang sudah diotorisasi dapat dilakukan tanpa izin mutasi tambahan. Jika tingkat risiko tidak jelas, berhenti dan tanyakan. Jangan melanjutkan mutasi otomatis setelah error, timeout atau putus koneksi: periksa kondisi secara baca-saja, lalu minta persetujuan baru bila tindakan lanjutan diperlukan. Dalam proses tanpa pengguna hadir, jangan lakukan tindakan berisiko tanpa persetujuan spesifik yang sudah tercatat.
+
 ## Kapan Digunakan
 
 - Audit VLAN, service-port, T-CONT, GEM port, flow, atau pemetaan port Ethernet.
@@ -91,7 +101,7 @@ Pipe di sini milik CLI OLT, bukan shell OS. `begin` dapat mencetak seluruh konfi
 
 Audit juga `sn-bind`, `registration-method`, `veip_1`, port Wi-Fi, native VLAN `def-vlan`, tagged list, service-port description, translasi user-vlan ke network VLAN, dan WAN profile. Redaksi password PPPoE sebelum membagikan konfigurasi.
 
-Bentuk `show running-config interface` yang disebut di atas adalah kandidat umum, tidak terverifikasi dari dua sumber. Utamakan `show run interface`; jangan menganggap alternatif didukung sebelum memeriksa bantuan firmware.
+Bentuk `show running-config interface <ONU_IF>` dan `<OLT_IF>` juga dicontohkan artikel Tembolok. Dukungan tetap harus diperiksa pada firmware target. Sumber tambahan: https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
 
 Sumber tambahan: https://github.com/randifilan/zte-c320/tree/bee34b4794055c7c67c32216c471cbb675342ca7
 
