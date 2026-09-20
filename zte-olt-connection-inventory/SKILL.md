@@ -50,5 +50,3 @@ KDBX terenkripsi tidak melindungi rahasia saat vault terbuka pada mesin tersusup
 ## Verifikasi
 Workbook tidak memiliki kolom Password atau formula input. Template awal nol profil. File vault belum dianggap tersedia sampai pengguna membuatnya dan berhasil unlock. Lakukan round-trip migrasi satu referensi tanpa menampilkan secret. Jangan mengaku koneksi OLT berhasil dari validasi file saja.
 
-## Sumber
-Kebutuhan pengguna dan desain penyimpanan lintas platform. Referensi: https://keepassxc.org/docs/ dan https://openpyxl.readthedocs.io/

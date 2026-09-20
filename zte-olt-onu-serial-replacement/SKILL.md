@@ -53,6 +53,3 @@ Mengganti serial bukan factory reset. Konfigurasi existing dapat tetap ada, teta
 ## Verifikasi
 Ulangi detail-info, pencarian SN baru, konfigurasi kedua lapisan, dan `show gpon onu state <OLT_IF> <ONU_ID>`. Serial harus sesuai target baru. Uji optik, MAC/VLAN, IP-host jika dipakai, dan layanan pelanggan. State working saja tidak cukup membuktikan layanan pulih. Laporkan hasil aktual; jika tidak terhubung ke OLT, tandai belum diuji perangkat.
 
-## Sumber
-Randy Filan, `07. Change ONU SN.md`:
-https://github.com/randifilan/zte-c320/tree/bee34b4794055c7c67c32216c471cbb675342ca7/07.%20Change%20ONU%20SN.md

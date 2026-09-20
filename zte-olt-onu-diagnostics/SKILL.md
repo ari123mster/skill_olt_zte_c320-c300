@@ -114,7 +114,6 @@ show gpon remote-onu model <ONU_IF>
 
 Trafik `Bps` berarti byte per detik, bukan bit per detik; konversi ke bit/s dengan faktor 8. `pps` adalah paket per detik. Pembulatan throughput 0.0% tidak berarti tidak ada trafik. Attenuation dalam dB berbeda dari power dBm. Nol pada System uptime/kolom histori dapat merupakan field kosong atau tidak didukung; tidak membuktikan baru reboot. `0000-00-00` bukan waktu kejadian yang valid.
 
-Sumber tambahan: https://github.com/randifilan/zte-c320/tree/bee34b4794055c7c67c32216c471cbb675342ca7
 
 ## Batas penggunaan
 
@@ -129,13 +128,4 @@ show interface optical-module-info <OLT_IF>
 ```
 Optik PON memberi data modul, Tx, temperatur, tegangan, dan threshold. RxPower N/A pada modul PON tidak otomatis berarti semua ONU offline; korelasikan attenuation per ONU. Periksa `Config state` pada detail-info: `working` dengan `Config state: fail` belum berarti provisioning sukses. Artikel mencampur target command dan interface output contoh; selalu cocokkan target aktual.
 
-Sumber tambahan: https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
 
-## Sumber
-
-Referensi silang: Idrus Firmansyah, "12 Text CLI Populer di OLT GPON ZTE" (29 Juli 2018). Perintah fungsi terkait sudah tercakup; bukan prosedur baru.
-https://idrusfirmansyah.blogspot.com/2018/07/10-basic-command-di-olt-gpon-zte.html
-
-
-Diadaptasi dari `00. Perintah Dasar OLT` oleh denniseptian:
-https://github.com/denniseptian/ZTE-C300/blob/master/00.%20Perintah%20Dasar%20OLT

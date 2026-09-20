@@ -72,9 +72,4 @@ Gunakan setelah dukungan model/firmware terkonfirmasi dan native/tagged requirem
 
 Artikel mencontohkan ONT sebagai uplink OLT downstream. Ini desain cascade, bukan obat jalur optik buruk: perlu link budget, kapasitas shared PON, loop prevention, VLAN isolation dan fault-domain review. Jangan mengaktifkan cascade, web WAN, atau PPPoE otomatis karena template trunk memuatnya.
 
-Sumber tambahan: https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
 
-## Sumber
-
-Randy Filan (randifilan), zte-c320; adaptasi prosedural. Lisensi sumber belum diverifikasi; tidak diberi lisensi baru.
-https://github.com/randifilan/zte-c320/tree/bee34b4794055c7c67c32216c471cbb675342ca7

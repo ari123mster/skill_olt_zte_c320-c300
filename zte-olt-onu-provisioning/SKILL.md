@@ -128,9 +128,4 @@ Hotspot pada sumber merupakan layanan VLAN bridge ke gateway eksternal, bukan se
 
 Sumber juga memakai `ssid auth wep ... open-system`. Jangan salin sebagai default: WEP usang dan open authentication berisiko. Gunakan kebijakan keamanan Wi-Fi yang disetujui dan sintaks firmware terverifikasi; captive portal tidak menggantikan enkripsi radio. Jika sengaja hotspot terbuka, perlu persetujuan risiko dan isolasi pelanggan. Pertanyaan PPPoE/bridge, access/trunk, VLAN/eth dan ACS tetap wajib.
 
-Sumber tambahan: https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
 
-## Sumber
-
-Randy Filan (randifilan), zte-c320; adaptasi prosedural. Lisensi sumber belum diverifikasi; tidak diberi lisensi baru.
-https://github.com/randifilan/zte-c320/tree/bee34b4794055c7c67c32216c471cbb675342ca7

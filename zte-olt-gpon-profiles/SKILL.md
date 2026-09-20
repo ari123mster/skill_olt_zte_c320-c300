@@ -96,9 +96,4 @@ Artikel memberi ONU-type gabungan `onu-type <TYPE> gpon max-tcont <N> max-gempor
 
 Jangan memakai perhitungan kapasitas artikel sebagai aturan vendor: 1.25 Gbps bukan tepat 1000 Mbps; batas ONU dan budget DBA bergantung card/firmware serta overhead. Bahkan 128 × 8000 kbps = 1,024,000 kbps, bukan ≤1,000,000. `GPONSRV Parameter Exceeds Range` harus dicek terhadap batas profile/resource aktual, bukan otomatis diperbaiki dengan rate tertentu. T-CONT mengalokasikan bandwidth upstream, bukan tunnel simetris. Satu GEM dapat memuat beberapa VLAN seperti contoh trunk sumber lain. Jangan mengubah profile bersama tanpa memetakan pengguna terdampak.
 
-Sumber tambahan: https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
 
-## Sumber
-
-Randy Filan (randifilan), zte-c320; adaptasi prosedural. Lisensi sumber belum diverifikasi; tidak diberi lisensi baru.
-https://github.com/randifilan/zte-c320/tree/bee34b4794055c7c67c32216c471cbb675342ca7

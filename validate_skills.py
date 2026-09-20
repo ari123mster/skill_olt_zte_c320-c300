@@ -30,13 +30,12 @@ for path in files:
     assert ': ' not in desc, 'Unquoted YAML description colon'
     assert 'platforms: [linux, macos, windows]' in front, path
     assert body.strip() and len(text) < 100000, path
-    for section in ('## Kapan Digunakan', '## Pitfalls', '## Verifikasi', '## Sumber'):
+    for section in ('## Kapan Digunakan', '## Pitfalls', '## Verifikasi'):
         assert section in body, (path, section)
     assert text.count('```') % 2 == 0, path
     assert name in readme, ('README missing', name)
     assert '## Persetujuan pengguna untuk eksekusi berisiko' in body, path
     assert 'Diam atau jawaban ambigu bukan persetujuan.' in body, path
-    assert re.search(r'https://(?:github\.com|pastebin\.com|www\.tembolok\.id|openpyxl\.readthedocs\.io)/', body), path
     texts.append(text)
     print('PASS', name)
 combined = '\n'.join(texts)

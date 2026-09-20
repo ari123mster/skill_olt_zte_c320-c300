@@ -107,7 +107,6 @@ Firmware C320 pada sumber kedua memakai `Current IP address`, `Current mask`, `C
 
 Sebelum renew, rekam flag DHCP, ping-response, dan traceroute-response aktual. Contoh pasangan false/true dari sumber mengubah ketiganya: jika flag awal ping/traceroute bukan true, jangan gunakan template itu mentah. Minta konfirmasi sintaks firmware yang mempertahankan kebijakan semula. Setelah selesai, pastikan flag final kembali ke kebijakan yang disetujui dan IP aktif diperoleh.
 
-Sumber tambahan: https://github.com/randifilan/zte-c320/tree/bee34b4794055c7c67c32216c471cbb675342ca7
 
 ## Batas penggunaan
 
@@ -115,11 +114,3 @@ Template ini adalah CLI perangkat, bukan shell OS. Tidak ada koneksi otomatis. G
 
 Untuk perubahan, simpan kondisi awal, rencana pemulihan, dan persetujuan eksplisit target serta dampak. Tidak ada auto-save, retry mutasi, reset, atau penonaktifan proteksi sebagai langkah diagnosis. Jika tidak ada akses perangkat, keluarkan rencana saja dan tandai belum diuji. Sumber komunitas bukan jaminan sintaks untuk semua firmware C300/C320. Lisensi sumber belum diverifikasi; tidak diberikan lisensi ulang.
 
-## Sumber
-
-Referensi silang: Idrus Firmansyah, "12 Text CLI Populer di OLT GPON ZTE" (29 Juli 2018). Perintah fungsi terkait sudah tercakup; bukan prosedur baru.
-https://idrusfirmansyah.blogspot.com/2018/07/10-basic-command-di-olt-gpon-zte.html
-
-
-Diadaptasi dari `00. Perintah Dasar OLT` oleh denniseptian:
-https://github.com/denniseptian/ZTE-C300/blob/master/00.%20Perintah%20Dasar%20OLT

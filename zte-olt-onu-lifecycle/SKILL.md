@@ -80,7 +80,6 @@ Sumber kedua masuk langsung dari `configure terminal` ke `pon-onu-mng <ONU_IF>` 
 
 Sumber C320 menampilkan `Confirm to reboot? [yes/no]:`. Jawab `yes` hanya setelah persetujuan reboot spesifik dan target cocok. Jangan mengulang reboot ketika koneksi terputus; periksa state melalui sesi operator yang tersedia.
 
-Sumber tambahan: https://github.com/randifilan/zte-c320/tree/bee34b4794055c7c67c32216c471cbb675342ca7
 
 ## Batas penggunaan
 
@@ -88,11 +87,3 @@ Template ini adalah CLI perangkat, bukan shell OS. Tidak ada koneksi otomatis. G
 
 Untuk perubahan, simpan kondisi awal, rencana pemulihan, dan persetujuan eksplisit target serta dampak. Tidak ada auto-save, retry mutasi, reset, atau penonaktifan proteksi sebagai langkah diagnosis. Jika tidak ada akses perangkat, keluarkan rencana saja dan tandai belum diuji. Sumber komunitas bukan jaminan sintaks untuk semua firmware C300/C320. Lisensi sumber belum diverifikasi; tidak diberikan lisensi ulang.
 
-## Sumber
-
-Referensi silang: Idrus Firmansyah, "12 Text CLI Populer di OLT GPON ZTE" (29 Juli 2018). Perintah fungsi terkait sudah tercakup; bukan prosedur baru.
-https://idrusfirmansyah.blogspot.com/2018/07/10-basic-command-di-olt-gpon-zte.html
-
-
-Diadaptasi dari `00. Perintah Dasar OLT` oleh denniseptian:
-https://github.com/denniseptian/ZTE-C300/blob/master/00.%20Perintah%20Dasar%20OLT

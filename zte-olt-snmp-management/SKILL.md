@@ -44,6 +44,3 @@ Operator menguji polling dari NMS berizin, penolakan sumber lain dan penerimaan 
 ## Pengaman
 Template CLI perangkat, bukan shell OS. Validasi target/firmware dan input; tolak newline atau pemisah command. Rekam kondisi awal, rencana pemulihan, lalu minta persetujuan perubahan spesifik. Operator memasukkan rahasia melalui jalur aman; jangan meminta password/community di chat. Redaksi rahasia dari output. Jangan menyimpan permanen tanpa verifikasi dan izin. Sintaks C320 tidak dijamin untuk semua C300/model firmware.
 
-## Sumber
-Arianto, Tembolok.ID, artikel diperbarui 3 Maret 2026. Lisensi belum diverifikasi; tidak diberikan lisensi ulang.
-https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/

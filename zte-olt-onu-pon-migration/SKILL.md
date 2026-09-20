@@ -188,9 +188,3 @@ Koordinasikan fiber kembali, hapus hanya binding baru yang memang dibuat oleh mi
 - Prosedur ini adalah komposisi registrasi/penghapusan/restore layanan, bukan command move vendor yang teruji.
 - Tidak mengubah inventaris koneksi OLT/host hanya karena interface pelanggan berpindah.
 
-## Sumber
-Command dasar registrasi dan diagnosis:
-https://github.com/randifilan/zte-c320
-Command penghapusan ONU dan pemeriksaan:
-https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
-Alur migrasi dan pengaman disusun untuk review pengguna; sumber tersebut tidak membuktikan migrasi end-to-end pada setiap firmware. Lisensi sumber tidak dinyatakan ulang.

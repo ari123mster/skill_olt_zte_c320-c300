@@ -92,9 +92,4 @@ show run interface <UPLINK_IF>
 ```
 Catat link/admin status, media, native VLAN, speed, duplex dan negotiation. Artikel berisi ketidaksesuaian: perintah negotiation auto tetapi output no negotiation auto, serta label GE/FE yang tidak konsisten. Gunakan spesifikasi card/SFP dan hasil aktual; jangan memaksa auto-negotiation atau speed dari contoh. Flowcontrol/isolation bukan parameter yang boleh dimatikan otomatis.
 
-Sumber tambahan: https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
 
-## Sumber
-
-Diadaptasi dari `00. Perintah Dasar OLT` oleh denniseptian:
-https://github.com/denniseptian/ZTE-C300/blob/master/00.%20Perintah%20Dasar%20OLT
