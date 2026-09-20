@@ -1,0 +1,111 @@
+---
+name: zte-olt-onu-access-management
+description: Kelola pencarian, port, dan IP-host ONT ZTE.
+version: 0.1.0
+platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, onu, ethernet, ip-host]
+    related_skills: []
+---
+
+# Akses dan Port ONT ZTE
+
+Menemukan ONT berdasarkan SN, membaca IP-host/port Ethernet, serta menyiapkan perubahan lock, unlock, atau DHCP renew dengan pengaman.
+
+## Kapan Digunakan
+
+- Lokasi ONT belum diketahui tetapi SN tersedia.
+- Perlu memeriksa IP routing-mode atau status port Ethernet ONT.
+- Perlu lock/unlock port atau renew DHCP client setelah persetujuan.
+
+## Input Wajib
+
+- SN untuk pencarian, atau `<ONU_IF>` yang sudah diverifikasi.
+- `<ETH_IF>` untuk operasi port, contoh `eth_0/1`.
+- ID IP-host, contoh `1`.
+
+## Prosedur Baca-Saja
+
+1. Cari ONT:
+   ```text
+   show gpon onu by sn <SERIAL_NUMBER>
+   ```
+   Simpan hasil `<ONU_IF>` dan cocokkan serial melalui detail-info sebelum mutasi.
+
+2. Cek IP-host:
+   ```text
+   show gpon remote-onu ip-host <ONU_IF>
+   ```
+   Bedakan nilai konfigurasi `IP/Mask/Gateway` dari nilai aktif `CurIP/CurMask/CurGateway`.
+
+3. Cek semua status port Ethernet:
+   ```text
+   show gpon remote-onu interface eth <ONU_IF>
+   ```
+   Bedakan `Admin status` dan `Operate status`.
+
+## Operasi Perubahan
+
+Sebelum menjalankan: tampilkan target ONT, serial, port/host ID, dampak, dan minta persetujuan eksplisit.
+
+Masuk mode (sumber C320 kedua langsung memakai `pon-onu-mng`; baris `pon-onu` di sumber pertama ambigu, konfirmasi firmware sebelum memakainya):
+```text
+configure terminal
+pon-onu
+pon-onu-mng <ONU_IF>
+```
+
+Lock port:
+```text
+interface eth <ETH_IF> state lock
+```
+
+Unlock port:
+```text
+interface eth <ETH_IF> state unlock
+```
+
+Renew DHCP untuk IP-host:
+```text
+ip-host <HOST_ID> dhcp-enable false ping-response false traceroute-response false
+ip-host <HOST_ID> dhcp-enable true ping-response true traceroute-response true
+```
+
+Renew memutus IP-host sementara. Jangan lakukan pada management path aktif tanpa jalur pemulihan.
+
+## Pitfalls
+
+- Hasil pencarian SN harus diverifikasi; jangan mutasi dari hasil search saja.
+- Lock port memutus layanan di port tersebut.
+- Toggle DHCP juga mengubah respons ping/traceroute sesuai contoh sumber.
+- Satu ONT dapat memiliki beberapa IP-host dan beberapa port Ethernet.
+
+## Verifikasi
+
+Setelah perubahan, keluar ke mode privileged lalu ulangi perintah baca status port atau IP-host. Laporkan nilai sebelum dan sesudah.
+
+## Tambahan C320: Wi-Fi dan IP-host
+
+Untuk status radio baca:
+```text
+show gpon remote-onu interface wifi <ONU_IF>
+```
+Catat setiap `wifi_0/x`, admin/operate status, Tx/Rx rate, dan power beserta unit. Nilai nol bukan bukti radio rusak; dukungan laporan OMCI berbeda antar model.
+
+Firmware C320 pada sumber kedua memakai `Current IP address`, `Current mask`, `Current gateway`, `Current primary DNS`, dan `Current second DNS`, bukan hanya `CurIP`. Host dapat memakai PPPoE, bukan selalu DHCP. Jangan men-toggle DHCP pada host PPPoE.
+
+Sebelum renew, rekam flag DHCP, ping-response, dan traceroute-response aktual. Contoh pasangan false/true dari sumber mengubah ketiganya: jika flag awal ping/traceroute bukan true, jangan gunakan template itu mentah. Minta konfirmasi sintaks firmware yang mempertahankan kebijakan semula. Setelah selesai, pastikan flag final kembali ke kebijakan yang disetujui dan IP aktif diperoleh.
+
+Sumber tambahan: https://github.com/randifilan/zte-c320/tree/bee34b4794055c7c67c32216c471cbb675342ca7
+
+## Batas penggunaan
+
+Template ini adalah CLI perangkat, bukan shell OS. Tidak ada koneksi otomatis. Gunakan sesi operator berizin atau analisis output yang diberikan pengguna. Validasi OLT, interface, ID, dan firmware; tolak input yang menyisipkan newline/pemisah perintah. Jangan menjalankan placeholder literal. Redaksi password dan data pelanggan pada laporan.
+
+Untuk perubahan, simpan kondisi awal, rencana pemulihan, dan persetujuan eksplisit target serta dampak. Tidak ada auto-save, retry mutasi, reset, atau penonaktifan proteksi sebagai langkah diagnosis. Jika tidak ada akses perangkat, keluarkan rencana saja dan tandai belum diuji. Sumber komunitas bukan jaminan sintaks untuk semua firmware C300/C320. Lisensi sumber belum diverifikasi; tidak diberikan lisensi ulang.
+
+## Sumber
+
+Diadaptasi dari `00. Perintah Dasar OLT` oleh denniseptian:
+https://github.com/denniseptian/ZTE-C300/blob/master/00.%20Perintah%20Dasar%20OLT
