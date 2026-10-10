@@ -8,7 +8,7 @@ Transkripsi lengkap file PON Config ONU-TYPE dari repositori denniseptian/ZTE-C3
 - Setelah persetujuan, konteksnya konfigurasi global lalu pon, sesuai firmware. Sumber tidak menyertakan wrapper mode CLI. Jangan mengarang sintaks yang tidak didukung.
 - Nama mirip bukan tipe identik: ZTE-F609 dan ZTEG-F609 memiliki parameter berbeda. OPEN_* bukan jaminan universal.
 - Parameter yang tidak tercantum tidak boleh diasumsikan nol atau disalin dari model lain; misalnya max-tcont ZTEG-F670 tidak tercantum.
-- Definisi interface tidak lengkap untuk semua tipe: beberapa OPEN_* tidak memiliki onu-type-if; ZTEG-F820 dideskripsikan 24ETH,32POTS tetapi file hanya mencantumkan eth_0/1–4. Jangan menganggap katalog siap pakai untuk model tersebut tanpa melengkapi dari bukti perangkat/vendor.
+- Definisi interface tidak lengkap untuk semua tipe: OPEN_FIBERHOME, OPEN_HUAWEI, OPEN_NOKIA, ZTEG-9806H dan ZTEG-MSAG tidak memiliki onu-type-if sama sekali; ZTEG-F625 memakai rf_0/1 untuk CATV; ZTEG-F820 dideskripsikan 24ETH,32POTS tetapi file hanya mencantumkan eth_0/1–4. Jangan menganggap katalog siap pakai untuk model tersebut tanpa melengkapi dari bukti perangkat/vendor.
 - service-mgmt-via-non-omci wifi enable hanya dipakai jika diperlukan dan didukung, bukan otomatis.
 - Perubahan tipe bersama dapat berdampak semua ONU pemakainya. Backup, pemetaan dampak, persetujuan command/rollback, read-back dan pilot satu ONU wajib. write perlu izin persistensi. Belum diuji perangkat.
 

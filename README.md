@@ -24,11 +24,12 @@ Skill tambahan untuk review: zte-olt-onu-pon-migration — pemindahan ONU antar-
 12. zte-olt-onu-wan-web — akses web WAN terbatas, bukan default provisioning.
 13. zte-olt-onu-serial-replacement — penggantian binding serial ONT existing.
 14. zte-olt-onu-tr069-acs — tambahan ACS opsional; wajib tanya ya/tidak saat aktivasi.
-
 15. zte-olt-clock-ntp — jam, timezone dan NTP.
 16. zte-olt-snmp-management — community dan monitoring SNMP.
 17. zte-olt-admin-ssh — akun administrator dan SSH.
 18. zte-olt-onu-decommission — penghapusan registrasi ONU.
+19. zte-olt-connection-inventory — inventaris koneksi Excel dan referensi vault KeePassXC.
+20. zte-olt-onu-pon-migration — pemindahan ONU antar-PON pada OLT yang sama (draft untuk review).
 
 Tambahan Tembolok: https://www.tembolok.id/setting-olt-zte-c320-via-console-terminal-telnet/
 Console/PON/management: bootstrap-management; NTP: clock-ntp; SNMP: snmp-management; akun/SSH: admin-ssh; status uplink: uplink-vlan-operations; DBA tipe 5/GEM traffic/show profile: gpon-profiles; discovery/optik PON: onu-diagnostics; binding WAN eth/SSID/hotspot: onu-provisioning; hapus ONU: onu-decommission; trunk eksplisit/cascade: onu-trunking; audit: onu-config-audit. Topik lain digabung dengan skill existing. Klaim kapasitas/speed yang tidak konsisten serta contoh WEP/open Wi-Fi diberi pengaman, bukan default otomatis.
@@ -83,8 +84,9 @@ Setiap SKILL.md dapat dibaca mandiri. Semua blok perintah merupakan CLI perangka
 
 Jalankan validator dokumen dari terminal:
 ```text
-python "D:/skill_olt_zte_c320&c300/validate_skills.py"
+python validate_skills.py
 ```
+Jalankan dari folder paket; path absolut tidak diperlukan.
 Validasi dokumen tidak membuktikan kompatibilitas firmware atau keberhasilan pada OLT nyata.
 
 ## Status

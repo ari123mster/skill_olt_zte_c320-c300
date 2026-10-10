@@ -6,9 +6,8 @@ platforms: [linux, macos, windows]
 metadata:
   hermes:
     tags: [zte, olt, uplink, vlan, switchover]
-    related_skills: []
+    related_skills: [zte-olt-system-health, zte-olt-vlan-provisioning]
 ---
-
 # Uplink, VLAN, dan Operasi Board OLT ZTE
 
 Membaca optik uplink dan membership VLAN. Juga mendokumentasikan reset slot dan switchover sebagai operasi berisiko tinggi.
@@ -79,7 +78,7 @@ Risiko: pergantian control module dapat mengganggu control plane. Jangan gunakan
 
 Setelah operasi berisiko, cek `show card`, health system, uplink, VLAN, alarm, dan layanan terdampak. Catat kondisi sebelum/sesudah serta siapa yang menyetujui.
 
-## Batas penggunaan
+## Prasyarat dan pengaman
 
 Template ini adalah CLI perangkat, bukan shell OS. Tidak ada koneksi otomatis. Gunakan sesi operator berizin atau analisis output yang diberikan pengguna. Validasi OLT, interface, ID, dan firmware; tolak input yang menyisipkan newline/pemisah perintah. Jangan menjalankan placeholder literal. Redaksi password dan data pelanggan pada laporan.
 
@@ -91,5 +90,3 @@ show interface port-status <UPLINK_IF>
 show run interface <UPLINK_IF>
 ```
 Catat link/admin status, media, native VLAN, speed, duplex dan negotiation. Artikel berisi ketidaksesuaian: perintah negotiation auto tetapi output no negotiation auto, serta label GE/FE yang tidak konsisten. Gunakan spesifikasi card/SFP dan hasil aktual; jangan memaksa auto-negotiation atau speed dari contoh. Flowcontrol/isolation bukan parameter yang boleh dimatikan otomatis.
-
-

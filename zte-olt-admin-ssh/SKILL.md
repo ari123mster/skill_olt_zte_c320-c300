@@ -3,9 +3,13 @@ name: zte-olt-admin-ssh
 description: Kelola akun admin dan akses SSH OLT ZTE.
 version: 0.1.0
 platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, admin, ssh, account]
+    related_skills: [zte-olt-bootstrap-management, zte-olt-snmp-management]
 ---
-
 # Akun Administrator dan SSH
+
 ## Persetujuan pengguna untuk eksekusi berisiko
 
 Wajib minta dan tunggu persetujuan eksplisit pengguna sebelum setiap eksekusi berisiko. Permintaan diagnosis, aktivasi umum, pembuatan skill, atau persetujuan sebelumnya bukan izin untuk tindakan baru.
@@ -42,6 +46,5 @@ SSH aktif tidak otomatis mematikan Telnet. Sumber `no ssh server only` melonggar
 ## Verifikasi
 `show username`, `show ssh`; operator melakukan login baru dari management network dan memeriksa privilege. Jangan menutup sesi pemulihan sebelum lolos. Laporkan hasil tanpa hash/password.
 
-## Pengaman
+## Prasyarat dan pengaman
 Template CLI perangkat, bukan shell OS. Validasi target/firmware dan input; tolak newline atau pemisah command. Rekam kondisi awal, rencana pemulihan, lalu minta persetujuan perubahan spesifik. Operator memasukkan rahasia melalui jalur aman; jangan meminta password/community di chat. Redaksi rahasia dari output. Jangan menyimpan permanen tanpa verifikasi dan izin. Sintaks C320 tidak dijamin untuk semua C300/model firmware.
-

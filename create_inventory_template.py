@@ -6,7 +6,8 @@ from openpyxl.worksheet.datavalidation import DataValidation
 root = Path(__file__).resolve().parent
 path = root / 'olt_connections.xlsx'
 headers = ['OLT_ID', 'Nama_OLT', 'Host', 'Protocol', 'Port', 'Username', 'Credential_Ref', 'Catatan']
-assert not path.exists(), 'Refusing to overwrite existing credential workbook'
+if path.exists():
+    raise SystemExit('Refusing to overwrite existing credential workbook')
 wb = Workbook()
 ws = wb.active
 ws.title = 'OLT'

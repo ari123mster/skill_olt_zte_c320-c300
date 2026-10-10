@@ -3,8 +3,11 @@ name: zte-olt-onu-wan-web
 description: Atur akses web WAN ONT ZTE secara terbatas.
 version: 0.1.0
 platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, onu, wan, web-access]
+    related_skills: [zte-olt-onu-provisioning, zte-olt-onu-access-management]
 ---
-
 # Akses Web WAN ONT
 
 ## Persetujuan pengguna untuk eksekusi berisiko
@@ -48,4 +51,3 @@ Target C320; kompatibilitas C300 wajib dikonfirmasi lewat dokumentasi firmware a
 Validasi identitas OLT, port, SN, ONU ID, VLAN, nama profile, dan seluruh placeholder sebelum penggunaan. VLAN 1–4094; ID dan port harus tersedia serta sesuai kapasitas perangkat. Tolak input berisi newline atau pemisah perintah. Jangan menyalin alamat, serial, password, atau angka contoh sebagai konfigurasi produksi.
 
 Sebelum perubahan: simpan konfigurasi awal, petakan dampak, tentukan rencana pemulihan, dan minta persetujuan target serta perubahan spesifik. Kerjakan satu target dahulu. Berhenti jika command ditolak; jangan mencoba variasi mutasi secara acak. Jangan menyimpan perubahan permanen sebelum verifikasi layanan dan izin penyimpanan. Password diisi operator melalui jalur aman; jangan dicetak ke laporan atau log.
-

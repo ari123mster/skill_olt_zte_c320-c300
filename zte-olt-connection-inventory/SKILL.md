@@ -3,8 +3,11 @@ name: zte-olt-connection-inventory
 description: Kelola inventaris OLT dan vault KeePass lintas OS.
 version: 0.2.0
 platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, inventory, keepassxc, excel]
+    related_skills: [zte-olt-admin-ssh]
 ---
-
 # Inventaris OLT dan KeePassXC
 
 ## Persetujuan pengguna untuk eksekusi berisiko
@@ -27,7 +30,7 @@ Root paket adalah parent direktori skill, bukan working directory atau drive Win
 - Credential_Ref berupa path entry `OLT/<OLT_ID>`; judul entry harus unik dalam grup OLT. Username di vault dan inventaris harus konsisten; password hanya di vault.
 - Master passphrase dan key file tidak boleh disimpan dalam folder paket, script, Excel, chat, log atau memory agent. Database dan Excel boleh satu folder; key file harus terpisah.
 
-## Prasyarat
+## Prasyarat dan pengaman
 KeePassXC pada Windows/Linux. Untuk workbook, Python dan openpyxl (opsional `uv run --with openpyxl python ...`). Jangan menganggap executable berada di PATH; identifikasi lokasi instalasi tanpa menjalankannya dengan password sebagai argument. Gunakan fungsi UI KeePassXC yang tersedia untuk pembuatan database. Tidak ada integrasi auto-login dalam paket ini.
 
 ## Prosedur
@@ -49,4 +52,3 @@ KDBX terenkripsi tidak melindungi rahasia saat vault terbuka pada mesin tersusup
 
 ## Verifikasi
 Workbook tidak memiliki kolom Password atau formula input. Template awal nol profil. File vault belum dianggap tersedia sampai pengguna membuatnya dan berhasil unlock. Lakukan round-trip migrasi satu referensi tanpa menampilkan secret. Jangan mengaku koneksi OLT berhasil dari validasi file saja.
-

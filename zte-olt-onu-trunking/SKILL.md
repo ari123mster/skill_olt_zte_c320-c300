@@ -3,8 +3,11 @@ name: zte-olt-onu-trunking
 description: Konfigurasi trunk multi-VLAN pada port ONT ZTE.
 version: 0.1.0
 platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, onu, trunk, vlan]
+    related_skills: [zte-olt-onu-provisioning, zte-olt-vlan-provisioning]
 ---
-
 # Trunk dan Multiple Trunking ONT
 
 ## Persetujuan pengguna untuk eksekusi berisiko
@@ -71,5 +74,3 @@ vlan port <ETH_IF> vlan <TAGGED_VLAN_LIST>
 Gunakan setelah dukungan model/firmware terkonfirmasi dan native/tagged requirements jelas. Ini alternatif mode hybrid, bukan command tambahan untuk semua port. Verifikasi perilaku untagged aktual; jangan mengasumsikan native VLAN implisit.
 
 Artikel mencontohkan ONT sebagai uplink OLT downstream. Ini desain cascade, bukan obat jalur optik buruk: perlu link budget, kapasitas shared PON, loop prevention, VLAN isolation dan fault-domain review. Jangan mengaktifkan cascade, web WAN, atau PPPoE otomatis karena template trunk memuatnya.
-
-

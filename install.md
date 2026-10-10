@@ -39,6 +39,16 @@ Baca Path/Home dari `hermes profile show olt-agent`. Jangan menebak dari hostnam
 
 Isi variabel tujuan di contoh berikut dengan path aktual. Source adalah folder paket ini. Semua command harus memakai quote karena nama folder mengandung `&`.
 
+### 3a. Pastikan workbook inventaris ada di folder paket
+
+`olt_connections.xlsx` sengaja tidak di-commit (`*.xlsx` ada di .gitignore), jadi clone baru tidak memilikinya dan script 4A/4B akan berhenti saat menyalinnya. Jika file belum ada, buat template kosong dulu dari folder paket (butuh Python + openpyxl):
+
+```text
+python create_inventory_template.py
+```
+
+Script menolak menimpa workbook yang sudah ada. Jangan mengisi profil atau password pada tahap ini; ikuti MIGRASI.md setelah instalasi.
+
 ## 4A. Windows: impor SOUL dan skill melalui PowerShell
 
 Jika memakai CMD, jalankan `powershell` terlebih dahulu lalu gunakan blok PowerShell ini. Ganti nilai $dst bila hasil profile show berbeda. Jangan menjalankan profile selama penyalinan.
@@ -50,6 +60,7 @@ $dst = Join-Path $env:LOCALAPPDATA 'hermes\profiles\olt-agent'
 
 if (-not (Test-Path -LiteralPath $dst -PathType Container)) { throw 'Profile tidak ditemukan; cek hermes profile show olt-agent' }
 if (-not (Test-Path -LiteralPath (Join-Path $src 'SOUL.md'))) { throw 'SOUL sumber tidak ditemukan' }
+if (-not (Test-Path -LiteralPath (Join-Path $src 'olt_connections.xlsx'))) { throw 'olt_connections.xlsx belum ada; jalankan create_inventory_template.py dulu (langkah 3a)' }
 $skills = @(Get-ChildItem -LiteralPath $src -Directory | Where-Object { $_.Name -like 'zte-olt-*' -and (Test-Path -LiteralPath (Join-Path $_.FullName 'SKILL.md')) })
 if ($skills.Count -ne 20) { throw 'Jumlah skill bukan 20; periksa versi paket sebelum melanjutkan' }
 $skillRoot = Join-Path $dst 'skills'
@@ -80,7 +91,8 @@ src="$HOME/skill_olt_zte_c320&c300"
 dst="$HOME/.hermes/profiles/olt-agent"
 
 test -d "$dst" || { printf '%s\n' 'Profile tidak ditemukan'; exit 1; }
-test -f "$src/SOUL.md"
+test -f "$src/SOUL.md" || { printf '%s\n' 'SOUL sumber tidak ditemukan'; exit 1; }
+test -f "$src/olt_connections.xlsx" || { printf '%s\n' 'olt_connections.xlsx belum ada; jalankan create_inventory_template.py dulu (langkah 3a)'; exit 1; }
 skills=()
 for dir in "$src"/zte-olt-*; do
   if [ -d "$dir" ] && [ -f "$dir/SKILL.md" ]; then skills+=("$dir"); fi
@@ -91,7 +103,7 @@ shopt -s nullglob dotglob
 existing=("$dst/skills"/*)
 [ "${#existing[@]}" -eq 0 ] || { printf '%s\n' 'Folder skills tujuan tidak kosong'; exit 1; }
 if [ -e "$dst/SOUL.md" ]; then
-  [ ! -e "$dst/SOUL.before-olt-install.md" ] || exit 1
+  [ ! -e "$dst/SOUL.before-olt-install.md" ] || { printf '%s\n' 'Backup SOUL sudah ada; berhenti agar tidak tertimpa'; exit 1; }
   cp -- "$dst/SOUL.md" "$dst/SOUL.before-olt-install.md"
 fi
 cp -- "$src/SOUL.md" "$dst/SOUL.md"

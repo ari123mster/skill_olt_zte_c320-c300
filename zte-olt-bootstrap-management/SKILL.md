@@ -3,8 +3,11 @@ name: zte-olt-bootstrap-management
 description: Siapkan chassis dan jaringan manajemen OLT ZTE.
 version: 0.1.0
 platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, c320, management, bootstrap]
+    related_skills: [zte-olt-vlan-provisioning, zte-olt-admin-ssh, zte-olt-clock-ntp]
 ---
-
 # Bootstrap dan Manajemen OLT
 
 ## Persetujuan pengguna untuk eksekusi berisiko
@@ -90,5 +93,3 @@ show gpon onu state <OLT_IF>
 Jangan menganggap semua PON default shutdown. Jangan melihat langsung ke konektor optik yang aktif. MNG1 pada sumber juga memakai `negotiation auto` dan `tag-mode untag`; gunakan hanya jika media/topologi cocok. Hindari menghapus default route lewat `no ip route 0.0.0.0 0.0.0.0` tanpa mencatat rute lama dan akses pemulihan. Management in-band bisa terputus akibat loop; sediakan out-of-band.
 
 Persistensi: `write` dari privileged mode setelah verifikasi dan izin. Tunggu respons aktual sukses/error; jangan mereboot untuk menguji penyimpanan. Layout card dan singkatan add-card sumber berbeda dari sumber lain; cocokkan hardware nyata, jangan jalankan kedua template chassis.
-
-

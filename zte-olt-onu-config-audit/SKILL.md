@@ -6,9 +6,8 @@ platforms: [linux, macos, windows]
 metadata:
   hermes:
     tags: [zte, olt, onu, gpon, configuration]
-    related_skills: []
+    related_skills: [zte-olt-onu-diagnostics, zte-olt-onu-provisioning]
 ---
-
 # Audit Konfigurasi ONT ZTE C300/C320
 
 Membaca konfigurasi interface GPON dan manajemen ONU tanpa mengubah perangkat.
@@ -101,11 +100,8 @@ Pipe di sini milik CLI OLT, bukan shell OS. `begin` dapat mencetak seluruh konfi
 
 Audit juga `sn-bind`, `registration-method`, `veip_1`, port Wi-Fi, native VLAN `def-vlan`, tagged list, service-port description, translasi user-vlan ke network VLAN, dan WAN profile. Redaksi password PPPoE sebelum membagikan konfigurasi.
 
-
-
-## Batas penggunaan
+## Prasyarat dan pengaman
 
 Template ini adalah CLI perangkat, bukan shell OS. Tidak ada koneksi otomatis. Gunakan sesi operator berizin atau analisis output yang diberikan pengguna. Validasi OLT, interface, ID, dan firmware; tolak input yang menyisipkan newline/pemisah perintah. Jangan menjalankan placeholder literal. Redaksi password dan data pelanggan pada laporan.
 
 Untuk perubahan, simpan kondisi awal, rencana pemulihan, dan persetujuan eksplisit target serta dampak. Tidak ada auto-save, retry mutasi, reset, atau penonaktifan proteksi sebagai langkah diagnosis. Jika tidak ada akses perangkat, keluarkan rencana saja dan tandai belum diuji. Sumber komunitas bukan jaminan sintaks untuk semua firmware C300/C320. Lisensi sumber belum diverifikasi; tidak diberikan lisensi ulang.
-

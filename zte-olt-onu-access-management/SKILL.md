@@ -6,9 +6,8 @@ platforms: [linux, macos, windows]
 metadata:
   hermes:
     tags: [zte, olt, onu, ethernet, ip-host]
-    related_skills: []
+    related_skills: [zte-olt-onu-diagnostics, zte-olt-onu-config-audit]
 ---
-
 # Akses dan Port ONT ZTE
 
 Menemukan ONT berdasarkan SN, membaca IP-host/port Ethernet, serta menyiapkan perubahan lock, unlock, atau DHCP renew dengan pengaman.
@@ -59,10 +58,9 @@ Pembacaan status biasa pada target yang sudah diotorisasi dapat dilakukan tanpa 
 
 Sebelum menjalankan: tampilkan target ONT, serial, port/host ID, dampak, dan minta persetujuan eksplisit.
 
-Masuk mode (sumber C320 kedua langsung memakai `pon-onu-mng`; baris `pon-onu` di sumber pertama ambigu, konfirmasi firmware sebelum memakainya):
+Masuk mode (sumber C320 kedua langsung memakai `pon-onu-mng`; sumber pertama menyisipkan baris `pon-onu` yang ambigu — sengaja tidak dimasukkan ke template, tambahkan hanya jika firmware memang memerlukannya):
 ```text
 configure terminal
-pon-onu
 pon-onu-mng <ONU_IF>
 ```
 
@@ -107,10 +105,8 @@ Firmware C320 pada sumber kedua memakai `Current IP address`, `Current mask`, `C
 
 Sebelum renew, rekam flag DHCP, ping-response, dan traceroute-response aktual. Contoh pasangan false/true dari sumber mengubah ketiganya: jika flag awal ping/traceroute bukan true, jangan gunakan template itu mentah. Minta konfirmasi sintaks firmware yang mempertahankan kebijakan semula. Setelah selesai, pastikan flag final kembali ke kebijakan yang disetujui dan IP aktif diperoleh.
 
-
-## Batas penggunaan
+## Prasyarat dan pengaman
 
 Template ini adalah CLI perangkat, bukan shell OS. Tidak ada koneksi otomatis. Gunakan sesi operator berizin atau analisis output yang diberikan pengguna. Validasi OLT, interface, ID, dan firmware; tolak input yang menyisipkan newline/pemisah perintah. Jangan menjalankan placeholder literal. Redaksi password dan data pelanggan pada laporan.
 
 Untuk perubahan, simpan kondisi awal, rencana pemulihan, dan persetujuan eksplisit target serta dampak. Tidak ada auto-save, retry mutasi, reset, atau penonaktifan proteksi sebagai langkah diagnosis. Jika tidak ada akses perangkat, keluarkan rencana saja dan tandai belum diuji. Sumber komunitas bukan jaminan sintaks untuk semua firmware C300/C320. Lisensi sumber belum diverifikasi; tidak diberikan lisensi ulang.
-

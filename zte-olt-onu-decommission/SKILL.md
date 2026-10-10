@@ -3,9 +3,13 @@ name: zte-olt-onu-decommission
 description: Hapus registrasi ONU dengan verifikasi target.
 version: 0.1.0
 platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, onu, decommission, delete]
+    related_skills: [zte-olt-onu-serial-replacement, zte-olt-onu-pon-migration]
 ---
-
 # Penghapusan Registrasi ONU
+
 ## Persetujuan pengguna untuk eksekusi berisiko
 
 Wajib minta dan tunggu persetujuan eksplisit pengguna sebelum setiap eksekusi berisiko. Permintaan diagnosis, aktivasi umum, pembuatan skill, atau persetujuan sebelumnya bukan izin untuk tindakan baru.
@@ -35,6 +39,5 @@ Perintah berada pada interface gpon-olt, bukan gpon-onu. Hapus registrasi berbed
 ## Verifikasi
 `show run interface <OLT_IF>`, `show gpon onu by sn <SERIAL_NUMBER>`, `show gpon onu uncfg <OLT_IF>`. Pastikan binding target terhapus dan pelanggan lain tidak berubah. Simpan via `write` hanya jika izin persistensi diberikan.
 
-## Pengaman
+## Prasyarat dan pengaman
 Template CLI perangkat, bukan shell OS. Validasi target/firmware dan input; tolak newline atau pemisah command. Rekam kondisi awal, rencana pemulihan, lalu minta persetujuan perubahan spesifik. Operator memasukkan rahasia melalui jalur aman; jangan meminta password/community di chat. Redaksi rahasia dari output. Jangan menyimpan permanen tanpa verifikasi dan izin. Sintaks C320 tidak dijamin untuk semua C300/model firmware.
-

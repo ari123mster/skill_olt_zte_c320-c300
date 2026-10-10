@@ -1,4 +1,8 @@
-"""One-time safe conversion of EMPTY legacy template; no secret extraction."""
+"""LEGACY, one-time conversion of the EMPTY Password-column template; no secret extraction.
+
+Already applied to this package (see MIGRASI.md "Status awal"). New workbooks come from
+create_inventory_template.py with the Credential_Ref schema; keep this only for old copies.
+"""
 from pathlib import Path
 import os
 import tempfile
@@ -8,8 +12,11 @@ path = root / 'olt_connections.xlsx'
 original = path.read_bytes()
 wb = load_workbook(path)
 ws = wb['OLT']
-assert ws['G1'].value in ('Password', 'Credential_Ref'), 'Unexpected schema'
-assert all(c.value is None for row in ws.iter_rows(min_row=2) for c in row), 'Nonempty workbook: migrate credentials manually before conversion'
+# Plain if/raise, not assert: these guards must survive python -O.
+if ws['G1'].value not in ('Password', 'Credential_Ref'):
+    raise SystemExit('Unexpected schema')
+if any(c.value is not None for row in ws.iter_rows(min_row=2) for c in row):
+    raise SystemExit('Nonempty workbook: migrate credentials manually before conversion')
 ws['G1'] = 'Credential_Ref'
 ws.column_dimensions['G'].width = 32
 notes = wb['Petunjuk']
@@ -28,12 +35,17 @@ os.close(fd)
 try:
     wb.save(tmp)
     check = load_workbook(tmp)
-    assert check['OLT']['G1'].value == 'Credential_Ref'
-    assert len(check['OLT'].data_validations.dataValidation) == 2
-    assert all(c.value is None for row in check['OLT'].iter_rows(min_row=2) for c in row)
+    ok = (
+        check['OLT']['G1'].value == 'Credential_Ref'
+        and len(check['OLT'].data_validations.dataValidation) == 2
+        and all(c.value is None for row in check['OLT'].iter_rows(min_row=2) for c in row)
+    )
     check.close()
     wb.close()
-    assert path.read_bytes() == original, 'Workbook changed during update'
+    if not ok:
+        raise SystemExit('Converted workbook failed verification')
+    if path.read_bytes() != original:
+        raise SystemExit('Workbook changed during update')
     os.replace(tmp, path)
 finally:
     if os.path.exists(tmp): os.unlink(tmp)

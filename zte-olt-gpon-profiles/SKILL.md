@@ -3,8 +3,11 @@ name: zte-olt-gpon-profiles
 description: Buat profile DBA, VLAN, ONU-type, line dan remote.
 version: 0.1.0
 platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, gpon, profile, onu-type]
+    related_skills: [zte-olt-onu-provisioning, zte-olt-vlan-provisioning]
 ---
-
 # Profile GPON ZTE
 
 ## Persetujuan pengguna untuk eksekusi berisiko
@@ -22,7 +25,7 @@ Menyiapkan profile sebelum provisioning ONT. Perubahan profile bersama dapat mem
 
 ## Katalog ONU-type offline
 
-Saat memilih atau membuat ONU-type, baca `references/onu-type-catalog.md` memakai `read_file`. Berisi 20 nama beserta command parameter dan mapping interface yang tersedia dari sumber. Tidak perlu membuka web untuk materi ini. Katalog bukan bukti kompatibilitas semua firmware; perhatikan bagian keterbatasan dan jangan mengarang parameter yang hilang.
+Saat memilih atau membuat ONU-type, baca file `references/onu-type-catalog.md` (relatif terhadap folder skill ini). Berisi 20 nama beserta command parameter dan mapping interface yang tersedia dari sumber. Tidak perlu membuka web untuk materi ini. Katalog bukan bukti kompatibilitas semua firmware; perhatikan bagian keterbatasan dan jangan mengarang parameter yang hilang.
 
 ONU-type serta DBA/traffic/VLAN profile mengikuti pilihan pengguna. ALL/1G boleh jika dipilih dan tervalidasi, bukan default wajib. Jangan menjalankan seluruh katalog; pilih hanya tipe dan interface yang disetujui.
 
@@ -53,7 +56,7 @@ onu-type <TYPE> gpon max-iphost <COUNT>
 onu-type-if <TYPE> <INTERFACE>
 uncfg-onu-display-info model version mac sn pw vendorid
 ```
-Ulangi `onu-type-if` hanya untuk port nyata: eth, pots, wifi. Perintah display-info dapat menampilkan password; jangan aktifkan field `pw` tanpa kebutuhan dan proteksi output.
+Ulangi `onu-type-if` hanya untuk port nyata: eth, pots, wifi, rf (CATV). Perintah display-info dapat menampilkan password; jangan aktifkan field `pw` tanpa kebutuhan dan proteksi output.
 5. Dari konfigurasi global buat line profile:
 ```text
 onu-profile gpon line <LINE_PROFILE>
@@ -101,5 +104,3 @@ Output sumber menandai FBW/ABW/MBW dan SIR/PIR dalam kbps, CBS/PBS dalam kbytes.
 Artikel memberi ONU-type gabungan `onu-type <TYPE> gpon max-tcont <N> max-gemport <N> max-switch-perslot <N> max-flow-perswitch <N>` dan `onu-type-if <TYPE> eth_0/1-4` (juga wifi/pots). Range hanya jika model punya port tersebut dan firmware mendukung. Profile bernama ALL tidak membuktikan universal compatibility.
 
 Jangan memakai perhitungan kapasitas artikel sebagai aturan vendor: 1.25 Gbps bukan tepat 1000 Mbps; batas ONU dan budget DBA bergantung card/firmware serta overhead. Bahkan 128 × 8000 kbps = 1,024,000 kbps, bukan ≤1,000,000. `GPONSRV Parameter Exceeds Range` harus dicek terhadap batas profile/resource aktual, bukan otomatis diperbaiki dengan rate tertentu. T-CONT mengalokasikan bandwidth upstream, bukan tunnel simetris. Satu GEM dapat memuat beberapa VLAN seperti contoh trunk sumber lain. Jangan mengubah profile bersama tanpa memetakan pengguna terdampak.
-
-

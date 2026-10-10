@@ -3,8 +3,11 @@ name: zte-olt-vlan-provisioning
 description: Konfigurasi VLAN dan tagging uplink OLT ZTE.
 version: 0.1.0
 platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, vlan, uplink, tagging]
+    related_skills: [zte-olt-uplink-vlan-operations, zte-olt-onu-trunking]
 ---
-
 # Provisioning VLAN dan Uplink
 
 ## Persetujuan pengguna untuk eksekusi berisiko
@@ -53,4 +56,3 @@ Target C320; kompatibilitas C300 wajib dikonfirmasi lewat dokumentasi firmware a
 Validasi identitas OLT, port, SN, ONU ID, VLAN, nama profile, dan seluruh placeholder sebelum penggunaan. VLAN 1–4094; ID dan port harus tersedia serta sesuai kapasitas perangkat. Tolak input berisi newline atau pemisah perintah. Jangan menyalin alamat, serial, password, atau angka contoh sebagai konfigurasi produksi.
 
 Sebelum perubahan: simpan konfigurasi awal, petakan dampak, tentukan rencana pemulihan, dan minta persetujuan target serta perubahan spesifik. Kerjakan satu target dahulu. Berhenti jika command ditolak; jangan mencoba variasi mutasi secara acak. Jangan menyimpan perubahan permanen sebelum verifikasi layanan dan izin penyimpanan. Password diisi operator melalui jalur aman; jangan dicetak ke laporan atau log.
-

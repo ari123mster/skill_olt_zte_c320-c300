@@ -3,8 +3,11 @@ name: zte-olt-onu-pon-migration
 description: Migrasi ONU PPPoE antar-PON; bridge belum didukung.
 version: 0.1.0
 platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, onu, pon, migration]
+    related_skills: [zte-olt-onu-decommission, zte-olt-onu-provisioning, zte-olt-onu-diagnostics]
 ---
-
 # Pindah ONU antar-PON — draft untuk review
 
 Status: prosedur perencanaan berbasis command dasar yang sudah terdokumentasi. Belum diuji di perangkat. Tidak ada command migrasi atomik yang diverifikasi dari sumber; jangan mengarang command move/copy ONU. Penulisan skill tidak memberi izin menjalankan migrasi.
@@ -57,9 +60,11 @@ ONU-type dan profile tidak dikunci ke `ALL` atau `1G`. Sebelum menyusun rencana 
 
 Jika pengguna memilih mempertahankan konfigurasi, gunakan nilai asal yang sudah dibaca dan terverifikasi tanpa bertanya ulang setiap parameter. Jika profile pilihan belum tersedia atau tidak kompatibel, berhenti dan jelaskan; jangan membuat profile atau menggantinya diam-diam. Pembuatan/perubahan profile bersama memerlukan rencana dampak dan persetujuan terpisah. Sintaks penerapan line/remote profile tetap harus diverifikasi, bukan dikarang.
 
-## Pra-pemeriksaan baca-saja
+## Prasyarat dan pengaman
 
 Konfirmasi OLT/model/firmware, identitas pelanggan dan SN melalui sumber berizin. Template adalah CLI OLT, bukan shell OS. Validasi interface, ID, VLAN dan SN; tolak newline/pemisah command. Jangan menebak batas ONU/kapasitas dari model saja.
+
+## Pra-pemeriksaan baca-saja
 
 ```text
 show card
@@ -187,4 +192,3 @@ Koordinasikan fiber kembali, hapus hanya binding baru yang memang dibuat oleh mi
 - Profile dan VLAN global tidak boleh dihapus saat membersihkan binding pelanggan.
 - Prosedur ini adalah komposisi registrasi/penghapusan/restore layanan, bukan command move vendor yang teruji.
 - Tidak mengubah inventaris koneksi OLT/host hanya karena interface pelanggan berpindah.
-

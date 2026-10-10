@@ -3,9 +3,13 @@ name: zte-olt-snmp-management
 description: Konfigurasi SNMP monitoring OLT secara terbatas.
 version: 0.1.0
 platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, snmp, monitoring, nms]
+    related_skills: [zte-olt-system-health, zte-olt-admin-ssh]
 ---
-
 # SNMP Monitoring
+
 ## Persetujuan pengguna untuk eksekusi berisiko
 
 Wajib minta dan tunggu persetujuan eksplisit pengguna sebelum setiap eksekusi berisiko. Permintaan diagnosis, aktivasi umum, pembuatan skill, atau persetujuan sebelumnya bukan izin untuk tindakan baru.
@@ -41,6 +45,5 @@ Output `show snmp c` dapat membocorkan community; redaksi sebelum laporan. SNMP 
 ## Verifikasi
 Operator menguji polling dari NMS berizin, penolakan sumber lain dan penerimaan trap jika diminta. Konfigurasi saja bukan bukti monitoring berjalan.
 
-## Pengaman
+## Prasyarat dan pengaman
 Template CLI perangkat, bukan shell OS. Validasi target/firmware dan input; tolak newline atau pemisah command. Rekam kondisi awal, rencana pemulihan, lalu minta persetujuan perubahan spesifik. Operator memasukkan rahasia melalui jalur aman; jangan meminta password/community di chat. Redaksi rahasia dari output. Jangan menyimpan permanen tanpa verifikasi dan izin. Sintaks C320 tidak dijamin untuk semua C300/model firmware.
-

@@ -3,9 +3,13 @@ name: zte-olt-clock-ntp
 description: Atur waktu, zona waktu dan NTP pada OLT ZTE.
 version: 0.1.0
 platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, clock, ntp, timezone]
+    related_skills: [zte-olt-bootstrap-management]
 ---
-
 # Waktu dan NTP
+
 ## Persetujuan pengguna untuk eksekusi berisiko
 
 Wajib minta dan tunggu persetujuan eksplisit pengguna sebelum setiap eksekusi berisiko. Permintaan diagnosis, aktivasi umum, pembuatan skill, atau persetujuan sebelumnya bukan izin untuk tindakan baru.
@@ -44,6 +48,5 @@ Perubahan jam dapat mengacaukan urutan histori/log. IP server dan tanggal contoh
 ## Verifikasi
 Ulangi `show clock` dan `show ntp status`; catat zona waktu dan status sinkron aktual. Server terkonfigurasi belum berarti synchronized. Jangan mengaku sinkron ketika masih LOCAL/unsynchronized.
 
-## Pengaman
+## Prasyarat dan pengaman
 Template CLI perangkat, bukan shell OS. Validasi target/firmware dan input; tolak newline atau pemisah command. Rekam kondisi awal, rencana pemulihan, lalu minta persetujuan perubahan spesifik. Operator memasukkan rahasia melalui jalur aman; jangan meminta password/community di chat. Redaksi rahasia dari output. Jangan menyimpan permanen tanpa verifikasi dan izin. Sintaks C320 tidak dijamin untuk semua C300/model firmware.
-

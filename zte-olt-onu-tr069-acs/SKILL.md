@@ -3,8 +3,11 @@ name: zte-olt-onu-tr069-acs
 description: Tambahkan TR-069 dan ACS saat aktivasi ONU ZTE.
 version: 0.1.0
 platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, onu, tr069, acs]
+    related_skills: [zte-olt-onu-provisioning, zte-olt-gpon-profiles]
 ---
-
 # Aktivasi Opsional TR-069/ACS
 
 ## Persetujuan pengguna untuk eksekusi berisiko
@@ -76,4 +79,3 @@ Template diparameterkan dari sumber; konfirmasi grammar, ID dan metode autentika
 ## Verifikasi
 
 Baca ulang konfigurasi ONU dan `show gpon remote-onu ip-host <ONU_IF>`. Cocokkan WAN manajemen dan alamat DHCP aktual. Di server ACS, operator wajib melihat perangkat dengan serial yang benar, Inform terbaru setelah perubahan, serta sesi autentikasi sukses. Keberadaan config/IP saja tidak membuktikan ACS aktif. Jangan klaim sukses jika akses log ACS tidak tersedia; tandai verifikasi belum lengkap. Uji ulang layanan utama PPPoE atau bridge dan pastikan akses admin tidak melebar. Simpan permanen hanya setelah hasil dan izin `write`.
-

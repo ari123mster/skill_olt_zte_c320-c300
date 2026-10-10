@@ -6,9 +6,8 @@ platforms: [linux, macos, windows]
 metadata:
   hermes:
     tags: [zte, olt, onu, gpon, diagnostics]
-    related_skills: []
+    related_skills: [zte-olt-onu-config-audit, zte-olt-onu-access-management, zte-olt-onu-lifecycle]
 ---
-
 # Diagnosis ONT ZTE C300/C320
 
 Gunakan perintah baca-saja untuk menilai status, sinyal, trafik, identitas, dan histori ONT. Jangan menyimpulkan akar masalah dari satu indikator.
@@ -114,8 +113,7 @@ show gpon remote-onu model <ONU_IF>
 
 Trafik `Bps` berarti byte per detik, bukan bit per detik; konversi ke bit/s dengan faktor 8. `pps` adalah paket per detik. Pembulatan throughput 0.0% tidak berarti tidak ada trafik. Attenuation dalam dB berbeda dari power dBm. Nol pada System uptime/kolom histori dapat merupakan field kosong atau tidak didukung; tidak membuktikan baru reboot. `0000-00-00` bukan waktu kejadian yang valid.
 
-
-## Batas penggunaan
+## Prasyarat dan pengaman
 
 Template ini adalah CLI perangkat, bukan shell OS. Tidak ada koneksi otomatis. Gunakan sesi operator berizin atau analisis output yang diberikan pengguna. Validasi OLT, interface, ID, dan firmware; tolak input yang menyisipkan newline/pemisah perintah. Jangan menjalankan placeholder literal. Redaksi password dan data pelanggan pada laporan.
 
@@ -127,5 +125,3 @@ show gpon onu uncfg <OLT_IF>
 show interface optical-module-info <OLT_IF>
 ```
 Optik PON memberi data modul, Tx, temperatur, tegangan, dan threshold. RxPower N/A pada modul PON tidak otomatis berarti semua ONU offline; korelasikan attenuation per ONU. Periksa `Config state` pada detail-info: `working` dengan `Config state: fail` belum berarti provisioning sukses. Artikel mencampur target command dan interface output contoh; selalu cocokkan target aktual.
-
-

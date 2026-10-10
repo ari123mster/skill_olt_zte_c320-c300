@@ -3,8 +3,11 @@ name: zte-olt-onu-provisioning
 description: Daftarkan ONU dan layanan PPPoE atau CCTV ZTE.
 version: 0.1.0
 platforms: [linux, macos, windows]
+metadata:
+  hermes:
+    tags: [zte, olt, onu, pppoe, provisioning]
+    related_skills: [zte-olt-gpon-profiles, zte-olt-onu-trunking, zte-olt-onu-tr069-acs]
 ---
-
 # Registrasi ONU dan Layanan PPPoE/CCTV
 
 ## Persetujuan pengguna untuk eksekusi berisiko
@@ -127,5 +130,3 @@ Artikel memakai `ethuni 1,2,3 ssid 1`; mapping indeks ke port fisik dan dukungan
 Hotspot pada sumber merupakan layanan VLAN bridge ke gateway eksternal, bukan server hotspot di OLT. Untuk SSID yang disetujui, sumber memberi `vlan port <WIFI_IF> mode tag vlan <HOTSPOT_VLAN>`. Verifikasi OMCI dan tagging internal pada model; bukan bukti frame Wi-Fi pelanggan harus tagged.
 
 Sumber juga memakai `ssid auth wep ... open-system`. Jangan salin sebagai default: WEP usang dan open authentication berisiko. Gunakan kebijakan keamanan Wi-Fi yang disetujui dan sintaks firmware terverifikasi; captive portal tidak menggantikan enkripsi radio. Jika sengaja hotspot terbuka, perlu persetujuan risiko dan isolasi pelanggan. Pertanyaan PPPoE/bridge, access/trunk, VLAN/eth dan ACS tetap wajib.
-
-
