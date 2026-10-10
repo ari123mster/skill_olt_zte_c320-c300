@@ -20,6 +20,12 @@ Pembacaan status biasa pada target yang sudah diotorisasi dapat dilakukan tanpa 
 ## Kapan Digunakan
 Menyiapkan profile sebelum provisioning ONT. Perubahan profile bersama dapat memengaruhi semua pelanggan pemakainya.
 
+## Katalog ONU-type offline
+
+Saat memilih atau membuat ONU-type, baca `references/onu-type-catalog.md` memakai `read_file`. Berisi 20 nama beserta command parameter dan mapping interface yang tersedia dari sumber. Tidak perlu membuka web untuk materi ini. Katalog bukan bukti kompatibilitas semua firmware; perhatikan bagian keterbatasan dan jangan mengarang parameter yang hilang.
+
+ONU-type serta DBA/traffic/VLAN profile mengikuti pilihan pengguna. ALL/1G boleh jika dipilih dan tervalidasi, bukan default wajib. Jangan menjalankan seluruh katalog; pilih hanya tipe dan interface yang disetujui.
+
 ## Prosedur
 1. Inventaris profile existing dan pengguna profile lewat konfigurasi aktual. Pilih nama baru untuk menghindari perubahan global tidak sengaja.
 2. Definisikan DBA sesuai SLA. Bentuk dari sumber; pilih satu tipe per profile, jangan menjalankan seluruh variasi dengan nama sama:
