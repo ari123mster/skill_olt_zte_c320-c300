@@ -89,6 +89,3 @@ python validate_skills.py
 Jalankan dari folder paket; path absolut tidak diperlukan.
 Validasi dokumen tidak membuktikan kompatibilitas firmware atau keberhasilan pada OLT nyata.
 
-## Status
-
-Seluruh fungsi OLT dalam lingkup kedua sumber sudah dipetakan. Paket belum diinstal dan belum diuji ke perangkat jaringan.
